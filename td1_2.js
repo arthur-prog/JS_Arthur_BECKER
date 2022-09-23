@@ -236,6 +236,15 @@ function additionEntiers(){
 
 // additionEntiers()
 
+function additionEntiersProgFonctionelle(){
+    let tab = [5, 6, 7, 3, 1];
+    let x = 0;
+    tab.forEach(element => x += element);
+    console.log(x);
+}
+
+// additionEntiersProgFonctionelle()
+
 //4.2
 function entiersPair(){
     let tab = [5, 6, 7, 3, 1, 4, 8];
@@ -249,6 +258,15 @@ function entiersPair(){
 }
 
 // entiersPair()
+
+function entiersPairProgFonctionnelle(){
+    let tab = [5, 6, 7, 3, 1, 4, 8];
+    let x = 0;
+    tab.forEach(element => element%2 === 0 ? x++ : null);
+    console.log(x);
+}
+
+// entiersPairProgFonctionnelle()
 
 //4.3
 function fusionTab(){
@@ -290,6 +308,43 @@ function fusionTab(){
 }
 
 // fusionTab()
+
+function fusionTabProgFonctionnelle(){
+    function merge(left, right){
+        let tab = [];
+        let l = 0;
+        let r = 0;
+        while (l < left.length && r < right.length){
+            left[l] < right[r] ? tab.push(left[l++]) : tab.push(right[r++]);
+        }
+        return tab.concat(left.slice(l)).concat(right.slice(r));
+    }
+
+    function sortTab(tab){
+        // return (tab.length<2?tab:());
+        if (tab.length < 2) {
+            return tab;
+        }
+        let mid = Math.floor(tab.length / 2);
+        let right = tab.slice(mid);
+        let left = tab.slice(0, mid);
+        let all = merge(sortTab(left), sortTab(right));
+        all.unshift(0, tab.length);
+        tab.splice.apply(tab, all);
+        return tab;
+    }
+
+    let tab1 = [5, 12, 7, 65];
+    let tab2 = [-3, 50, 16, 60];
+    let sortedTab1 = sortTab(tab1);
+    let sortedTab2 = sortTab(tab2);
+    let tab3 = [...sortedTab1, ...sortedTab2];
+    let sortedTab3 = sortTab(tab3);
+
+    console.log(sortedTab3);
+}
+
+// fusionTabProgFonctionnelle()
 
 //4.4
 function rechercheDicho(){
@@ -344,7 +399,58 @@ function rechercheDicho(){
     console.log(dichotomie(sortedTab1, 12));
 }
 
-//rechercheDicho()
+// rechercheDicho()
+
+function rechercheDichoProgFonctionnelle(){
+    function merge(left, right){
+        let tab = [];
+        let l = 0;
+        let r = 0;
+        while (l < left.length && r < right.length){
+            left[l] < right[r] ? tab.push(left[l++]) : tab.push(right[r++]);
+        }
+        return tab.concat(left.slice(l)).concat(right.slice(r));
+    }
+
+    function sortTab(tab){
+        // return (tab.length<2?tab:());
+        if (tab.length < 2) {
+            return tab;
+        }
+        let mid = Math.floor(tab.length / 2);
+        let right = tab.slice(mid);
+        let left = tab.slice(0, mid);
+        let all = merge(sortTab(left), sortTab(right));
+        all.unshift(0, tab.length);
+        tab.splice.apply(tab, all);
+        return tab;
+    }
+
+    function dichotomie(tab, val){
+        let a = 0;
+        let b = tab.length - 1;
+        while(a<=b){
+            let mid = Math.floor((a+b)/2);
+            if (tab[mid] === val){
+                return mid;
+            }
+            else if (tab[mid] < val){
+                a = mid + 1;
+            }
+            else{
+                b = mid -1;
+            }
+        }
+        return -1;
+    }
+
+    let tab1 = [5, 12, 7, 65];
+    let sortedTab1 = sortTab(tab1);
+    console.log(sortedTab1);
+    console.log(dichotomie(sortedTab1, 12));
+}
+
+// rechercheDichoProgFonctionnelle()
 
 //4.5
 function plusGrandPair(...valeurs){
@@ -362,7 +468,18 @@ function plusGrandPair(...valeurs){
     }
     return x;
 }
+
 // console.log(plusGrandPair(8, 23, 94, -2, 35, 72))
+
+function plusGrandPairProgFonctionnelle(...valeurs){
+    let tabPair = [];
+    let x = -1;
+    valeurs.forEach(element => element%2 === 0 ? tabPair.push(element) : null);
+    tabPair.forEach(element => element > x ? x = element : null);
+    return x;
+}
+
+// console.log(plusGrandPairProgFonctionnelle(8, 23, 94, -2, 35, 72))
 
 //4.6
 function occurences(){
@@ -399,3 +516,22 @@ function occurences(){
 }
 
 // occurences()
+
+function occurencesProgFonctionnelle(){
+
+    let string = "je pense donc je suis";
+    let arrayString = string.split(/[^a-zA-Z]/);
+    let arrayKey = [];
+    let arrayValue = [];
+    let arrayAssociative = [];
+
+    arrayString.forEach(element => arrayKey.includes(element) ?
+    arrayKey.forEach(function callback(value, index){ value === element ? arrayValue[index] += 1 : null})
+    : (arrayKey.push(element), arrayValue.push(1)));
+
+    let obj;
+    arrayKey.forEach(function callback(value, index){ obj = {}, obj[value] = arrayValue[index], arrayAssociative.push(obj) });
+    arrayAssociative.forEach(element => console.log(element));
+}
+
+// occurencesProgFonctionnelle()
