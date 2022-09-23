@@ -1,4 +1,5 @@
-function types (){
+//2.1, 2.2
+function types(){
 
     function getType(variable){
         console.log(typeof variable)
@@ -14,7 +15,10 @@ function types (){
     var x
 }
 
-function convTypes (){
+// types()
+
+//2.3
+function convTypes(){
     let int = 5
     let string = "10"
     let string2 = "5.5"
@@ -38,7 +42,10 @@ function convTypes (){
     console.log(intFromString2)
 }
 
-function equal (){
+// convTypes()
+
+//2.4
+function equal(){
     let b=false;
     let n=0;
     let s='0';
@@ -60,6 +67,9 @@ function equal (){
     }
 }
 
+// equal()
+
+//3.1
 function upperCase(){
     let string = prompt("Entrez une chaine de caracteres en majuscules");
     while (string.toUpperCase() !== string){
@@ -68,6 +78,9 @@ function upperCase(){
     console.log(string);
 }
 
+// upperCase()
+
+//3.2
 function randomStringUpperCase(){
     let string = "a";
     let maj = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -96,6 +109,9 @@ function randomStringUpperCase(){
     console.log("Il a fallu " + x + " iterations")
 }
 
+// randomStringUpperCase()
+
+//3.3
 function chaineDeVoyelles(){
     let voyelles = ["a", "e", "i", "o", "u", "y"];
     let string = "";
@@ -106,6 +122,9 @@ function chaineDeVoyelles(){
     console.log(string);
 }
 
+// chaineDeVoyelles()
+
+//3.4
 function nomPrenom(){
     let nom = prompt("Entrez votre nom");
     let prenom = prompt("Entre votre prenom (avec un - pour les prenoms composes)");
@@ -120,6 +139,9 @@ function nomPrenom(){
     console.log(nomPrenom);
 }
 
+// nomPrenom()
+
+//3.5
 function chaineCryptee(){
     let chaine = prompt("Entrez la chaine a crypter");
     let arrayChaine = chaine.split('');
@@ -157,6 +179,9 @@ function chaineCryptee(){
     console.log(chaine2)
 }
 
+// chaineCryptee()
+
+//3.6
 function jazzBundle(){
     let n = 20;
     for(let i=1; i<=n; i++){
@@ -174,6 +199,8 @@ function jazzBundle(){
         }
     }
 }
+
+// jazzBundle()
 
 function jazzBundle2(){
     let n = 20;
@@ -195,7 +222,9 @@ function jazzBundle2(){
     }
 }
 
-//programmation fonctionelle à faire à partir d'ici <----------------------------------------------------------------------------
+// jazzBundle2()
+
+//4.1
 function additionEntiers(){
     let tab = [5, 6, 7, 3, 1];
     let x = 0;
@@ -205,6 +234,9 @@ function additionEntiers(){
     console.log(x);
 }
 
+// additionEntiers()
+
+//4.2
 function entiersPair(){
     let tab = [5, 6, 7, 3, 1, 4, 8];
     let x = 0;
@@ -216,6 +248,9 @@ function entiersPair(){
     console.log(x);
 }
 
+// entiersPair()
+
+//4.3
 function fusionTab(){
     function merge(left, right){
         let tab = [];
@@ -254,6 +289,9 @@ function fusionTab(){
     console.log(sortedTab3);
 }
 
+// fusionTab()
+
+//4.4
 function rechercheDicho(){
     function merge(left, right){
         let tab = [];
@@ -304,9 +342,11 @@ function rechercheDicho(){
     let sortedTab1 = sortTab(tab1);
     console.log(sortedTab1);
     console.log(dichotomie(sortedTab1, 12));
-
 }
 
+//rechercheDicho()
+
+//4.5
 function plusGrandPair(...valeurs){
     let tabPair = [];
     let x = -1;
@@ -324,6 +364,38 @@ function plusGrandPair(...valeurs){
 }
 // console.log(plusGrandPair(8, 23, 94, -2, 35, 72))
 
+//4.6
 function occurences(){
 
+    let string = "je pense donc je suis";
+    let arrayString = string.split(/[^a-zA-Z]/);
+    let arrayKey = [];
+    let arrayValue = [];
+    let arrayAssociative = [];
+
+    for (let i=0; i < arrayString.length; i++){
+        if (arrayKey.includes(arrayString[i])){
+            for (let j=0; j < arrayKey.length; j++){
+                if (arrayKey[j] === arrayString[i]){
+                    arrayValue[j] += 1;
+                }
+            }
+        }
+        else{
+            arrayKey.push(arrayString[i]);
+            arrayValue.push(1);
+        }
+    }
+
+    for (let i=0; i < arrayKey.length; i++){
+        let obj = {};
+        obj[arrayKey[i]] = arrayValue[i];
+        arrayAssociative.push(obj);
+    }
+
+    for (let i=0; i < arrayAssociative.length; i++){
+        console.log(arrayAssociative[i])
+    }
 }
+
+// occurences()
