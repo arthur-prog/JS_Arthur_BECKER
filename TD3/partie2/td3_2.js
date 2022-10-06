@@ -8,15 +8,15 @@ btnAdd.addEventListener('click', (event) => {
     nb_elt++;
     let divElt = document.getElementById("elt");
     let br = document.createElement("br");
-    divElt.appendChild(br);
+    divElt.insertBefore(br, btnAdd);
     let lbl = document.createElement("label");
     lbl.innerText = "Elément " + nb_elt + " ";
     lbl.for = "elt"+nb_elt;
-    divElt.appendChild(lbl);
+    divElt.insertBefore(lbl, btnAdd);
     let input = document.createElement("input");
     input.type = "text";
     input.id = "elt"+nb_elt;
-    divElt.appendChild(input);
+    divElt.insertBefore(input, btnAdd);
 });
 
 //bouton results
@@ -58,6 +58,8 @@ function afficherResultats(array, search_elt){
     let p_dicho = document.getElementById("dicho");
     p_somme.innerText = "";
     p_somme.innerText = "Somme des éléments: " + getSum41(array);
+
+
     p_nb_pairs.innerText = "";
     p_nb_pairs.innerText = "Nombre de pairs: " + getNumberOfEven42(array);
     p_plus_grand_pair.innerText = "";
@@ -66,8 +68,17 @@ function afficherResultats(array, search_elt){
         plus_grand_pair = "pas de pair dans la table";
     }
     p_plus_grand_pair.innerText = "Plus grand élément pair: " + plus_grand_pair;
+
+    
     p_dicho.innerText = "";
     p_dicho.innerText = "Position de l'élément dans la table: " + binarySearch44(array, search_elt);
+
+    let stringArray = array.toString();
+    if(stringArray !== array.sort().toString()){
+        let p = document.getElementById("erreur");
+        p.innerText = "Vos éléments ne sont pas triés";
+    }
+
 }
 
 function afficherErreur(){
