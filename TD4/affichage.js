@@ -66,7 +66,6 @@ function clicBouton (uneCase, y, x) {
 
         const victoire = morpion.aGagne(x, y);
         if (victoire) {
-            console.log("victoire");
             zoneMessage.innerHTML = 'Le joueur ' + morpion.joueur + ' a gagné !';
             desactiveEcouteurs();
             morpion.symbole === 'x' ? scores[0]++ : scores[1]++;

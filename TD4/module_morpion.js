@@ -145,7 +145,7 @@ export class Morpion{
     aGagne3ParmiN (x, y) {
         const aTrouver = this.#symbole.repeat(3);
 
-        // gagné en ligne ? : concaténation de la ligne, et recherche de la sous-chaîne gagnante
+        // gagné en ligne ? : concaténation de la ligne et recherche de la sous-chaîne gagnante
         let ligne = '';
         this.getLigne(y).forEach(element => (ligne += element));
         if (ligne.indexOf(aTrouver) >= 0) {
@@ -154,7 +154,7 @@ export class Morpion{
 
         // gagné en colonne ? : concaténation de la colonne et recherche de la sous-chaîne gagnante
         let col = '';
-        this.#morpion[x].forEach(element => (col += element[x]));
+        this.#morpion[x].forEach(element => (col += element));
         if (col.indexOf(aTrouver) >= 0) {
             return true;
         }
