@@ -1,4 +1,5 @@
 import {Morpion} from "./module_morpion.js";
+import {MorpionSimple} from "./module_morpion_simple.js";
 
 const MAX_GRILLE = 8;
 const MIN_GRILLE = 3;
@@ -26,7 +27,12 @@ function recommence(){
     if (Number.isNaN(taille) || taille < MIN_GRILLE || taille > MAX_GRILLE) {
         zoneMessage.innerHTML = 'Taille invalide !';
     } else {
-        morpion = new Morpion(taille, modeJeu);
+        if(modeJeu === "complet"){
+            morpion = new Morpion(taille);
+        }
+        else{
+            morpion = new MorpionSimple(taille);
+        }
 
         //suppression ancien tableau
         const table = document.getElementById('table_morpion');
@@ -38,17 +44,13 @@ function recommence(){
         setTimeout(function(){
             for (let i = 0; i < morpion.taille; i++) {
                 const ligne = table.insertRow(i);
-                let col = new Array(morpion.taille);
                 for (let j = 0; j < morpion.taille; j++) {
-                    col[j] = ' ';
-
                     const id = '' + ((i + 1) * 10 + (j + 1));
                     const cell = ligne.insertCell(j);
                     cell.innerHTML = "<input type='button' class='case' id='" + id + "'/>";
                     cell.addEventListener('click', function() { clicBouton(this, i, j) });
                     document.getElementById(id).value = '';
                 }
-                morpion.setCol(i, col);
             }
             zoneMessage.innerHTML = 'Joueur 1, à toi !';
             document.getElementById('btn_reset').disabled = true;
@@ -60,11 +62,18 @@ function recommence(){
 function clicBouton (uneCase, y, x) {
     if (morpion.getMorpionCase(x, y) === ' ') {
         morpion.setMorpionCase(x, y, morpion.symbole);
-        uneCase.firstChild.value = morpion.symbole;//ajout de firstChild
+        uneCase.firstChild.value = morpion.symbole;
         uneCase.firstChild.classList.add('joueur' + morpion.joueur);
         morpion.addCoup();
 
-        const victoire = morpion.aGagne(x, y);
+
+        let victoire;
+        if(modeJeu === "complet"){
+            victoire = morpion.aGagne(x, y);
+        }
+        else{
+            victoire = morpion.aGagne3ParmiN(x, y);
+        }
         if (victoire) {
             zoneMessage.innerHTML = 'Le joueur ' + morpion.joueur + ' a gagné !';
             desactiveEcouteurs();

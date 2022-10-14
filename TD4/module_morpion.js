@@ -5,21 +5,24 @@ export class Morpion{
     #symbole;
 
     #taille;
-    #modeJeu;
 
-    // static MAX_GRILLE = 8;
-    // static MIN_GRILLE = 3;
-
-    // zoneMessage.innerHTML = 'Joueur 1, à toi !';
-    // document.getElementById('btn_reset').disabled = true;
-
-    constructor (taille, mode_jeu) {
+    constructor (taille) {
         this.#morpion = new Array(taille);
         this.#nbCoups = 0;
         this.#joueur = 1;
         this.#symbole = 'x';
         this.#taille = taille;
-        this.#modeJeu = mode_jeu;
+        this.createTable();
+    }
+
+    createTable(){
+        for (let i = 0; i < this.#taille; i++) {
+            let col = new Array(this.#taille);
+            for (let j = 0; j < this.#taille; j++) {
+                col[j] = ' ';
+            }
+            this.setCol(i, col);
+        }
     }
 
     get symbole(){
@@ -48,10 +51,6 @@ export class Morpion{
 
     setCol(x, value){
         this.#morpion[x] = value;
-    }
-
-    getCol(x){
-        return this.#morpion[x];
     }
 
     getLigne(y){
@@ -83,10 +82,6 @@ export class Morpion{
     }
 
     aGagne (x, y) {
-        if (this.#modeJeu === 'simple') {
-            return this.aGagne3ParmiN(x, y);
-        }
-
         let nbSymboles;
 
         // gagné en ligne ?
@@ -135,48 +130,6 @@ export class Morpion{
                 }
             }
             if (nbSymboles === this.#taille) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    aGagne3ParmiN (x, y) {
-        const aTrouver = this.#symbole.repeat(3);
-
-        // gagné en ligne ? : concaténation de la ligne et recherche de la sous-chaîne gagnante
-        let ligne = '';
-        this.getLigne(y).forEach(element => (ligne += element));
-        if (ligne.indexOf(aTrouver) >= 0) {
-            return true;
-        }
-
-        // gagné en colonne ? : concaténation de la colonne et recherche de la sous-chaîne gagnante
-        let col = '';
-        this.#morpion[x].forEach(element => (col += element));
-        if (col.indexOf(aTrouver) >= 0) {
-            return true;
-        }
-
-        // gagné diagonale
-        if (x === y) {
-            let diagonale = '';
-            for (let lc = 0; lc < this.#taille; lc++) {
-                diagonale += this.#morpion[lc][lc];
-            }
-            if (diagonale.indexOf(aTrouver) >= 0) {
-                return true;
-            }
-        }
-
-        // gagné diag inverse
-        if (x === this.#taille - (y + 1)) {
-            let inverse = '';
-            for (let lc = 0; lc < this.#taille; lc++) {
-                inverse += this.#morpion[lc][this.#taille - (lc + 1)];
-            }
-            if (inverse.indexOf(aTrouver) >= 0) {
                 return true;
             }
         }
