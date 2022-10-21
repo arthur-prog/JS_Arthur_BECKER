@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TD5 - ex1</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="../css/index.css" />
+</head>
+<body>
+
+<h1 class="h1">API météo / centre de controle technique</h1>
+
+<div class="form-group">
+  <div>
+    <label for="dpt">Choisir un département:</label>
+    <select class="form-control" name="dpt" id="dpt">
+      <option value="">--Please choose an option--</option>
+    </select>
+  </div>
+</div>
+
+<div class="form-group">
+  <div id="divcom" style="display: none">
+    <label for="commune">Choisir une commune:</label>
+
+    <select class="form-control" name="commune" id="commune">
+      <option value="-1">--Please choose an option--</option>
+    </select>
+
+
+  </div>
+</div>
+
+<p id="pop"></p>
+
+<input type="button" class="btn btn-primary" style="display: none" value="Afficher la météo" id="btn-meteo">
+<br>
+<input type="button" class="btn btn-primary" style="display: none" value="Afficher les centres de contrôle technique" id="btn-ct">
+
+<script src="../js/index.js"></script>
+</body>
+</html>
