@@ -56,8 +56,6 @@ async function getData(pagination) {
     });
     const json = await response.json();
 
-    console.log(json);
-
     if(nbPages === undefined){
         nbPages = Math.ceil(json.nhits/nbRows);
     }
@@ -75,7 +73,6 @@ async function getData(pagination) {
         let table = document.createElement("table");
         table.appendChild(initializeTable());
         json.records.forEach(centre =>{
-            console.log(centre);
             let tr = document.createElement("tr");
             let nom = document.createElement("td");
             nom.innerText = centre.fields.cct_denomination;
